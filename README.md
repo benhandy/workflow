@@ -1,8 +1,8 @@
 <div style="font-size: 11pt;">
 This portfolio contains notebooks and projects where I explore data analysis, data science, and data engineering, primarily using Python & SQL.  
 I mostly use AWS suite for cloud hosting and extract, transform, and load (ETL) processes.  
-</div>
-<div style="font-size: 9pt;">
+
+
 - My undergraduate education in political science introduced me to programming with R.  
 - My professional background spans equity research, data science/analytics, and systems design.  
 - I am interested in all stages of the data lifecycle and enjoy learning and problem-solving in my free time.  
