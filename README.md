@@ -1,12 +1,12 @@
 
 This portfolio contains notebooks and projects where I explore data analysis, data science, and data engineering  
 
-I mostly use AWS suite for cloud hosting and python/SQL for extract, transform, and load (ETL) processes.  
+I mostly use AWS suite for cloud hosting and python/SQL for extract, transform, and load (ETL) processes  
 
 
-- My undergraduate education in political science introduced me to programming with R.  
-- My professional background spans equity research, data science/analytics, and systems design.  
-- I am interested in all stages of the data lifecycle and enjoy learning and problem-solving in my free time.  
+- My undergraduate education in political science introduced me to programming with R  
+- My professional background spans equity research, data science/analytics, and systems design  
+- I am interested in all stages of the data lifecycle and enjoy learning and problem-solving in my free time  
 
 
 ## Technologies  
