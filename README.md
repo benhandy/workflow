@@ -1,4 +1,4 @@
-<div style="font-size: 11pt;">
+<div style="font-family: Palatino, serif; font-size: 11pt;">
 This portfolio contains notebooks and projects where I explore data analysis, data science, and data engineering, primarily using Python & SQL.  
 I mostly use AWS suite for cloud hosting and extract, transform, and load (ETL) processes.  
 
