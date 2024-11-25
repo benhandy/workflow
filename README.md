@@ -1,4 +1,4 @@
-# Ben-Handy- 
+
 # This portfolio contains notebooks and some projects where I explore data analysis, data science, and data engineering using primarily python & SQL
 # I mostly use AWS suite for hosting to the cloud and extract, transform, load 
 # My undergraduate education in political science introduced me to programming with R. My professional background is in equity research, data science/analytics, and systems design 
