@@ -1,5 +1,4 @@
 <sub>
-  
 This portfolio contains notebooks and projects where I explore data analysis, data science, and data engineering, primarily using Python & SQL.  
 I mostly use AWS suite for cloud hosting and extract, transform, and load (ETL) processes.  
 
@@ -16,5 +15,4 @@ I mostly use AWS suite for cloud hosting and extract, transform, and load (ETL) 
 📧 [benhandy9@gmail.com](mailto:benhandy9@gmail.com)  
 🔗 [linkedIn](https://www.linkedin.com/in/benjamin-handy9/)  
 📂 [older projects](https://www.datacamp.com/portfolio/benhandy9)  
-
 </sub>
