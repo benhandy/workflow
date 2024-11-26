@@ -8,7 +8,7 @@ I mostly use AWS suite for cloud hosting and python/SQL for extract, transform, 
 
 - My undergraduate degree in political science emphasized applied statistics and introduced me to programming with R   
 - My professional background spans equity research, data science, and systems design  
-- I am deeply interested in the qualitative and quantitative business applications of all stages of the data lifecycle 
+- I am deeply interested in all stages of the data lifecycle 
 
 
 ## Technologies  
