@@ -1,7 +1,7 @@
 Ben Handy 
 
 
-This contains notebooks and projects where I explore data analysis, data science, and data engineering  
+This repository contains some notebooks and projects where I explore data analysis, data science, and data engineering  
 
 I mostly use AWS suite for cloud hosting and python/SQL for extract, transform, and load (ETL) processes  
 
