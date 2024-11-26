@@ -6,7 +6,7 @@ This repository contains some notebooks and projects where I explore data analys
 I mostly use AWS suite for cloud hosting and python/SQL for extract, transform, and load (ETL) processes  
 
 
-- My undergraduate degree in political science introduced me to programming with R   
+- My undergraduate degree in political science emphasized applied statistics and introduced me to programming with R   
 - My professional background spans equity research, data science, and systems design  
 - I am deeply interested in all stages of the data lifecycle 
 
