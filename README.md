@@ -1,4 +1,3 @@
-Ben Handy 
 
 
 This repository contains some notebooks and projects where I explore data analysis, data science, and data engineering  
