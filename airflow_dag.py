@@ -1,4 +1,7 @@
-## Building a DAG in Apache Airflow 
+## Here I build a DAG pipeline in Apache Airflow 
+## using Python operators then visualize it in the Airflow UI
+## and troubleshoot errors in the DAG
+
 
 import datetime as dt
 import json
