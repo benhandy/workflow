@@ -1,11 +1,15 @@
 ## Here I build a DAG pipeline in Apache Airflow 
 ## using Python operators then visualize it in the Airflow UI
-## and troubleshoot errors in the DAG.
+## and then troubleshoot errors in the DAG.
 ## The premise of this project is that I have been tasked to develop the 'Book of the Day' 
 ## feature where a random book is selected as book of  the day and displayed on a website.
 
 ## I use the Open Library Web APIs (books, authors, and covers APIs)
 ## to fetch information about a random book, authors, and book covers.
+
+## This project was completed during week 4 of 'Source Systems, Data Ingestion, and Pipelines'
+## a certification course taught by Joe Reis (author: Fundamentals of Data Engineering). 
+
 
 
 import datetime as dt
