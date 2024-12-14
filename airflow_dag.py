@@ -1,6 +1,11 @@
 ## Here I build a DAG pipeline in Apache Airflow 
 ## using Python operators then visualize it in the Airflow UI
-## and troubleshoot errors in the DAG
+## and troubleshoot errors in the DAG.
+## The premise of this project is that I have been tasked to develop the 'Book of the Day' 
+## feature where a random book is selected as book of  the day and displayed on a website.
+
+## I use the Open Library Web APIs (books, authors, and covers APIs)
+## to fetch information about a random book, authors, and book covers.
 
 
 import datetime as dt
