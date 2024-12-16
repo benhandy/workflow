@@ -321,3 +321,134 @@ with DAG(
     save_final_book_record_task >> cleanup_task
     cleanup_task >> end_task
 
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+## Here is a simple DAG which emphasizes Airflow best practices 
+
+"""
+DAG Task Descriptions:
+
+1. start: An empty task marking the start of the DAG, executed with DummyOperator. It doesn't perform any operations but creates a task instance in the Airflow metadata database.
+
+2. extract_load_orders: Extracts data from the `orders` table and loads it into the bronze zone in the S3 bucket at:
+   s3://<BUCKET_NAME>/bronze/orders/YYYY/MM/DD/
+   Implemented using SqlToS3Operator, an Amazon transfer operator to copy data from SQL to S3.
+
+3. transform_orders: Transforms data extracted from the `orders` table and loads it into the silver zone in the S3 bucket at:
+   s3://<BUCKET_NAME>/silver/orders/YYYY/MM/DD/
+   The transformation drops null records and duplicate rows. Executed using PythonOperator with the `drop_nas_and_duplicates` function.
+
+4. notification: Simulates a notification task by printing the number of rows in the transformed data. Executed using PythonOperator with the `notify_valid_records` function.
+
+5. end: An empty task marking the end of the DAG, executed with DummyOperator.
+"""
+
+import datetime as dt
+import re
+import pandas as pd
+from airflow import DAG
+from airflow.models import Variable
+from airflow.operators.dummy import DummyOperator
+from airflow.operators.python_operator import PythonOperator
+from airflow.providers.amazon.aws.transfers.sql_to_s3 import SqlToS3Operator
+from airflow.utils.context import Context
+
+S3_URI_PATTERN = r"^s3://[a-zA-Z0-9.\-_]+(/[a-zA-Z0-9.\-_]+)*$"
+
+def drop_nas_and_duplicates(
+    source_bucket: str,
+    source_key: str,
+    target_key: str,
+    target_bucket: str = "",
+    **context: Context,
+):
+    if not target_bucket:
+        target_bucket = source_bucket
+
+    source_s3_uri = f"s3://{source_bucket}/{source_key}"
+    target_s3_uri = f"s3://{target_bucket}/{target_key}"
+
+    assert re.match(S3_URI_PATTERN, source_s3_uri)
+    assert re.match(S3_URI_PATTERN, target_s3_uri)
+
+    df = pd.read_csv(source_s3_uri)
+    df = df.dropna()
+    df = df.drop_duplicates()
+    df.to_csv(target_s3_uri, index=False)
+
+    num_valid_records = len(df)
+    context["ti"].xcom_push(key="valid_records", value=num_valid_records)
+
+def notify_valid_records(table: str, **context: Context):
+    task_id = f"transform_{table}"
+    valid_records = context["ti"].xcom_pull(task_ids=task_id, key="valid_records")
+    print(f"Number of valid records in table {table}: {valid_records}")
+
+with DAG(
+    dag_id="simple_dag",
+    schedule="@daily",
+    start_date=dt.datetime(year=2024, month=12, day=16),
+    catchup=False,
+) as dag:
+    partition_date = '{{ macros.ds_format(ds, "%Y-%m-%d", "%Y/%m/%d") }}'
+
+    start_task = DummyOperator(task_id="start")
+
+    extract_and_load_task = SqlToS3Operator(
+        task_id="extract_and_load_orders",
+        sql_conn_id="mysql_connection",
+        query="SELECT * FROM orders;",
+        s3_bucket=Variable.get("s3_bucket"),
+        s3_key=f"bronze/{partition_date}/orders.csv",
+        replace=True,
+    )
+
+    transform_task = PythonOperator(
+        task_id="transform_orders",
+        python_callable=drop_nas_and_duplicates,
+        provide_context=True,
+        op_kwargs={
+            "source_bucket": Variable.get("s3_bucket_name"),
+            "source_key": f"bronze/{partition_date}/orders.csv",
+            "target_key": f"silver/{partition_date}/orders.csv",
+        },
+    )
+
+    notification_task = PythonOperator(
+        task_id="notification",
+        python_callable=notify_valid_records,
+        provide_context=True,
+        op_kwargs={"table": "orders"},
+    )
+
+    end_task = DummyOperator(task_id="end")
+
+    start_task >> extract_and_load_task >> transform_task >> notification_task >> end_task
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
