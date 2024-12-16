@@ -9,7 +9,8 @@
 
 ## This project was completed during week 4 of 'Source Systems, Data Ingestion, and Pipelines'
 ## a certification course taught by Joe Reis (author: Fundamentals of Data Engineering). 
-
+## This work reinforced my experience using Apache Airflow to orchestrate and monitor DAG pipelines
+## while offering me new opportunities to apply my learning
 
 
 import datetime as dt
