@@ -452,3 +452,18 @@ with DAG(
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+## Finally, here is a DAG with grouped tasks 
+# Comments on task behavior:
+# start: is an empty task marking the start of the DAG. It doesn't include any behavior.
+# extract_load_<table>: extracts data from the table <table> and loads it into the S3 bucket (Raw Data Bucket).
+#                       The destination path is s3://<BUCKET_NAME>/bronze/<table>/YYYY/MM/DD/.
+#                       You will execute this task using the SqlToS3Operator.
+# transform_<table>: transforms the data extracted from the table <table> and loads it into another zone of the S3 bucket.
+#                    The destination path is s3://<BUCKET_NAME>/silver/<table>/YYYY/MM/DD/.
+#                    The transformation also consists of dropping the null records and duplicate rows.
+#                    You will also use a PythonOperator which will call the drop_nas_and_duplicates function.
+
+
+
