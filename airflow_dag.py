@@ -1,3 +1,16 @@
+
+# This script demonstrates how to build a simple Airflow DAG for an ETL process
+# using core Airflow concepts like DAG and operator classes. 
+# The DAG consists of three tasks: extract, transform, and load.
+# I'm working in AWS Cloud9 and have set up a folder to store the Python scripts.
+# This example will show you how to create a DAG instance, set parameters, 
+# define tasks using PythonOperator, and set task dependencies.
+
+## More broadly, later in this script I build a machine learning pipeline 
+## displaying how to construct multiple dynamic DAGs based on configuration files.
+
+
+
 ## Here I build a DAG pipeline in Apache Airflow 
 ## using Python operators then visualize it in the Airflow UI
 ## and then troubleshoot errors in the DAG.
