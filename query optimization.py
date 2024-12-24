@@ -289,5 +289,17 @@ with open("individual_row_inserts.sql", "w") as insert_file, open("individual_ro
         delete_file.write(delete_statement)
 
 
+# check insertion
 
+with open('./sql/individual_row_inserts.sql', 'r') as file:
+    sql_commands = file.read()
+
+%timeit -n1 -r1 %sql $sql_commands
+
+# delete the data 
+
+with open('./sql/individual_row_deletes.sql', 'r') as file:
+    sql_commands = file.read()
+
+%timeit -n1 -r1 %sql $sql_commands
 
