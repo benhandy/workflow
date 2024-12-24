@@ -232,3 +232,62 @@ sql_statement = format_query(path='./sql/pg_query_3_tcp_h_q15.sql')
 
 %sql {sql_statement}
 
+# test query
+
+%%timeit -n1 -r1
+
+sql_statement = format_query(path='./sql/pg_query_4_tcp_h_q1.sql')
+
+%sql {sql_statement}
+
+
+"""
+
+Using the Faker library I will generate mock data for my INSERT statements. The Faker library will help me create realistic-looking fake data such as names, 
+addresses, and other relevant information.
+Leap Variable: The leap variable defines how many records I will create. By default, it will generate 50 new rows, but I can adjust it as needed.
+
+Use a loop to generate the specified number of records based on the leap value.
+For each record, I will generate the necessary data using Faker,
+create the INSERT statements for these records and write them to the individual_row_inserts.sql file.
+
+Simultaneously, I will create the corresponding DELETE operations and write them to the individual_row_deletes.sql file.
+
+
+"""
+
+
+from faker import Faker
+import os
+
+# init Faker instance
+fake = Faker()
+
+# define number of rows to insert
+leap = 50
+
+
+with open("individual_row_inserts.sql", "w") as insert_file, open("individual_row_deletes.sql", "w") as delete_file:
+    
+    # generate the specified number of records
+    for _ in range(leap):
+        # fake data
+        name = fake.name()
+        address = fake.address().replace("\n", " ")
+        city = fake.city()
+        country = fake.country()
+        email = fake.email()
+
+        # INSERT statement
+        insert_statement = f"INSERT INTO customers (name, address, city, country, email) VALUES ('{name}', '{address}', '{city}', '{country}', '{email}');\n"
+        
+        # DELETE statement (for the same record)
+        delete_statement = f"DELETE FROM customers WHERE email = '{email}';\n"
+        
+        # write INSERT and DELETE statements to the respective files
+        insert_file.write(insert_statement)
+        delete_file.write(delete_statement)
+
+
+
+
