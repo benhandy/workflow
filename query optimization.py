@@ -1,4 +1,6 @@
 """
+This is a SQL query optimization lab that I completed in a data engineering course with AWS.
+
 I use a Amazon Redshift database that leverages columnar storage, 
 and an Amazon RDS (Relational Database Service) PostgreSQL data that leverages row-oriented storage.
 
