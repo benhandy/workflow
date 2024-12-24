@@ -303,3 +303,71 @@ with open('./sql/individual_row_deletes.sql', 'r') as file:
 
 %timeit -n1 -r1 %sql $sql_commands
 
+
+"""
+
+Up to now, I have run some benchmarking analytical queries with a columnar database. 
+Now, let's perform the same queries with the PostgreSQL row database, 
+which is more suitable for transactional operations such as writes and deletes.
+
+
+"""
+
+
+# connecting to database
+
+RDSDBHOST = os.getenv('RDSDBHOST')
+RDSDBPORT = os.getenv('RDSDBPORT')
+RDSDBNAME = os.getenv('RDSDBNAME')
+RDSDBUSER = os.getenv('RDSDBUSER')
+RDSDBPASSWORD = os.getenv('RDSDBPASSWORD')
+
+postgres_connection_url = f'postgresql+psycopg2://{RDSDBUSER}:{RDSDBPASSWORD}@{RDSDBHOST}:{RDSDBPORT}/{RDSDBNAME}'
+print(postgres_connection_url)
+
+%sql {postgres_connection_url}
+
+# test that database is fully loaded
+
+%%sql
+SELECT * FROM information_schema.tables 
+WHERE table_schema = 'public'
+;
+
+%%sql 
+SELECT count(*) FROM public.lineitem
+;
+
+""" 
+
+Now that I have connected to the database, I will run the same queries 
+as the ones that were executed within the Redshift database.
+
+This allows me to test efficiency and benchmarks
+
+
+"""
+
+
+%%timeit -n1 -r1
+raw_sql_statement = """    
+    WITH lineitemorders AS (
+        SELECT *
+    FROM public.lineitem
+    WHERE l_orderkey in (1552449, 13620130, 45619461)
+    )
+    
+    SELECT DISTINCT lio.l_orderkey, lio.l_partkey, pt.p_name, ctr.c_custkey, ord.o_orderstatus, ord.o_orderdate, ntn.n_name, rgn.r_name
+    FROM lineitemorders lio
+    JOIN part pt ON pt.p_partkey = lio.l_partkey
+    JOIN orders ord ON lio.l_orderkey = ord.o_orderkey
+    JOIN customer ctr ON ctr.c_custkey = ord.o_custkey
+    JOIN nation ntn ON ntn.n_nationkey = ctr.c_nationkey 
+    JOIN region rgn ON rgn.r_regionkey = ntn.n_regionkey
+    ;
+"""
+
+sql_statement = format_query(query=raw_sql_statement)
+
+%sql {sql_statement}
+
