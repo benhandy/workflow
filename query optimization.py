@@ -350,6 +350,7 @@ This allows me to test efficiency and benchmarks
 
 """
 
+# query 1
 
 %%timeit -n1 -r1
 raw_sql_statement = """    
@@ -372,4 +373,75 @@ raw_sql_statement = """
 sql_statement = format_query(query=raw_sql_statement)
 
 %sql {sql_statement}
+
+
+# query 2
+
+%%timeit -n1 -r1
+raw_sql_statement = """    
+    WITH avg_balance_middle_east AS (
+        SELECT AVG(c_acctbal) AS avg_balance
+        FROM customer
+        JOIN nation ON customer.c_nationkey = nation.n_nationkey
+        JOIN region ON nation.n_regionkey = region.r_regionkey
+        WHERE region.r_name = 'MIDDLE EAST'
+    )
+    SELECT COUNT(DISTINCT customer.c_custkey)
+    FROM customer
+    JOIN nation ON customer.c_nationkey = nation.n_nationkey
+    JOIN region ON nation.n_regionkey = region.r_regionkey
+    WHERE region.r_name = 'MIDDLE EAST'
+      AND customer.c_acctbal > (SELECT avg_balance FROM avg_balance_middle_east);
+"""
+
+sql_statement = format_query(query=raw_sql_statement)
+
+%sql {sql_statement}
+
+
+
+# benchmark query
+
+%%timeit -n1 -r1
+
+sql_statement = format_query(path='./sql/pg_query_0_tcp_h_q14.sql')
+
+%sql {sql_statement}
+
+# test query 
+
+%%timeit -n1 -r1
+
+sql_statement = format_query(path='./sql/pg_query_1_tcp_h_q6.sql')
+
+%sql {sql_statement}
+
+# test query 
+
+%%timeit -n1 -r1
+
+sql_statement = format_query(path='./sql/pg_query_2_tcp_h_q18.sql')
+
+%sql {sql_statement}
+
+
+# test query 
+
+%%timeit -n1 -r1
+
+sql_statement = format_query(path='./sql/pg_query_3_tcp_h_q15.sql')
+
+%sql {sql_statement}
+
+
+# test query 
+
+%%timeit -n1 -r1
+
+sql_statement = format_query(path='./sql/pg_query_4_tcp_h_q1.sql')
+
+%sql {sql_statement}
+
+
+
 
