@@ -444,4 +444,36 @@ sql_statement = format_query(path='./sql/pg_query_4_tcp_h_q1.sql')
 
 
 
+"""
+
+Finally I execute the insertion and deletion operations that I performed over the Amazon Redshift database.
+
+
+"""
+
+
+# insert 
+
+with open('./sql/individual_row_inserts.sql', 'r') as file:
+    sql_commands = file.read()
+
+%timeit -n1 -r1 %sql $sql_commands
+
+# delete 
+
+with open('./sql/individual_row_deletes.sql', 'r') as file:
+    sql_commands = file.read()
+
+%timeit -n1 -r1 %sql $sql_commands
+
+
+"""
+
+While the performance metrics are not being returned from these queries,
+this exercise serves as a useful template to perform benchmark testing for SQL query optimization 
+between two different database servers.
+
+
+"""
+
 
