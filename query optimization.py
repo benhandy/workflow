@@ -199,4 +199,36 @@ WHERE r.r_name = 'MIDDLE EAST'
   AND c.c_acctbal > (SELECT avg_balance FROM avg_balance_middle_east);
 
 
+# benchmark analytical query
+%%timeit -n1 -r1
+
+sql_statement = format_query(path='./sql/pg_query_0_tcp_h_q14.sql')
+
+%sql {sql_statement}
+
+
+# test query
+
+%%timeit -n1 -r1
+
+sql_statement = format_query(path='./sql/pg_query_1_tcp_h_q6.sql')
+
+%sql {sql_statement}
+
+# test query
+
+%%timeit -n1 -r1
+
+sql_statement = format_query(path='./sql/pg_query_2_tcp_h_q18.sql')
+
+%sql {sql_statement}
+
+
+# test query 
+
+%%timeit -n1 -r1
+
+sql_statement = format_query(path='./sql/pg_query_3_tcp_h_q15.sql')
+
+%sql {sql_statement}
 
