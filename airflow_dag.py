@@ -479,7 +479,7 @@ with DAG(
 
 
 
-## Finally, here is a DAG with grouped tasks 
+## Here is a DAG with grouped tasks 
 # Comments on task behavior:
 # start: is an empty task marking the start of the DAG. It doesn't include any behavior.
 # extract_load_<table>: extracts data from the table <table> and loads it into the S3 bucket (Raw Data Bucket).
@@ -606,6 +606,8 @@ with DAG(
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 ## Lastly, I collaborated with the Machine Learning team to build a pipeline 
 ## for three fictitious Mobility-as-a-Service vendors: 
