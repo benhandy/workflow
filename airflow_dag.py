@@ -80,8 +80,7 @@ with DAG(
       
         random_book_id = randint(10001, 21000000)
 
-        # use previously obtained random number to get an Open Library work
-        # ID:
+        # use previously obtained random number to get an Open Library work ID:
         book_id = f"works/OL{random_book_id}W"
         logger.info(f"SELECTED BOOK ID: {book_id}")
 
