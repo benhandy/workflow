@@ -29,10 +29,10 @@
 ## feature where a random book is selected as book of  the day and displayed on a website
 
 ## I use the Open Library Web APIs (books, authors, and covers APIs)
-## to fetch information about a random book, authors, and book covers.
+## to fetch information about a random book, authors, and book covers
 
 ## This project was completed during week 4 of 'Source Systems, Data Ingestion, and Pipelines'
-## a certification course taught by Joe Reis (author: Fundamentals of Data Engineering). 
+## a certification course taught by Joe Reis (author: Fundamentals of Data Engineering) 
 ## This work reinforced my experience using Apache Airflow to orchestrate and monitor DAG pipelines
 ## while offering me some new opportunities to apply my learning
 
