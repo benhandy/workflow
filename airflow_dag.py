@@ -248,7 +248,7 @@ with DAG(
     
         initial_info = get_initial_info_dict(context["ds"])
 
-        # read information about the authors as list of strings:
+        # read information about the authors as list of strings
         authors_file_name = f"author_names_{context['ds']}.json"
         authors_object = client.get_object(
             Bucket=RAW_DATA_BUCKET,
