@@ -7,7 +7,7 @@
 # define tasks using PythonOperator, and set task dependencies
 
 ## More broadly, later in this script I build a machine learning pipeline 
-## displaying how to construct multiple dynamic DAGs based on configuration files.
+## displaying how to construct multiple dynamic DAGs based on configuration files
 
 
 
@@ -26,7 +26,7 @@
 ## using Python operators then visualize it in the Airflow UI
 ## and then troubleshoot errors in the DAG.
 ## The premise of this project is that I have been tasked to develop the 'Book of the Day' 
-## feature where a random book is selected as book of  the day and displayed on a website.
+## feature where a random book is selected as book of  the day and displayed on a website
 
 ## I use the Open Library Web APIs (books, authors, and covers APIs)
 ## to fetch information about a random book, authors, and book covers.
