@@ -614,13 +614,13 @@ with DAG(
 ## for three fictitious Mobility-as-a-Service vendors: 
 ## Alitran, Easy Destiny, and ToMyPlaceAI. 
 ## The goal was to preprocess and validate data for training a model 
-## to estimate ride durations. 
+## to estimate ride durations
 
 ## The pipeline included evaluating training metrics to determine 
 ## whether the model was suitable for deployment. 
 ## By enabling continuous training and evaluation, the solution 
 ## helped each vendor improve their ride duration estimation 
-## services over time.
+## services over time
 
 ## Here is the code from my bash terminal in Cloud-9 
 
