@@ -112,7 +112,7 @@ with DAG(
         logger.info(f"File: {file_name} saved successfully")
 
     # define the task that fetches the initial information about a random book
-    # and stores it in S3:
+    # and stores it in S3
     get_book_task = PythonOperator(
         task_id="get_random_book",
       
