@@ -209,7 +209,7 @@ with DAG(
 
 
         # read initial information about the book selected for the
-        # corresponding day using the `get_initial_info_dict` function.
+        # corresponding day using the `get_initial_info_dict` function
         initial_info = get_initial_info_dict(context["ds"])
      
         if "covers" in initial_info:
