@@ -1,6 +1,6 @@
 
 
-This repository contains personal projects where I explore data analysis, data science, and data engineering  
+This repository contains personal projects where I further explore data analysis, data science, and data engineering  
 
 I mostly use AWS suite for cloud hosting and python/SQL for extract, transform, and load (ETL) processes  
 
