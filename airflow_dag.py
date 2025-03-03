@@ -6,7 +6,7 @@
 # This example will show you how to create a DAG instance, set parameters, 
 # define tasks using PythonOperator, and set task dependencies
 
-## More broadly, later in this script I build a machine learning pipeline 
+## More broadly, later in this script I build a machine learning pipeline:
 ## displaying how to construct multiple dynamic DAGs based on configuration files
 
 
