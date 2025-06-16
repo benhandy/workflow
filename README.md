@@ -15,5 +15,5 @@ I am deeply interested in all stages of the data lifecycle
 - **Data Engineering:** Apache Airflow, ETL pipelines  
   
 
-📂 [older projects](https://www.datacamp.com/portfolio/benhandy9)  
+📂 [older projects](https://www.datacamp.com/portfolio/benhandy)  
 
