@@ -469,7 +469,7 @@ with open('./sql/individual_row_deletes.sql', 'r') as file:
 
 """
 
-While performance metrics are not returned from the above queries in github,
+While performance metrics are not returned from the above queries in github (I did not copy and paste them into this file) 
 this exercise and the queries within serves as a useful template to perform benchmark testing for SQL query optimization 
 between two different database servers. 
 
