@@ -473,6 +473,8 @@ While performance metrics are not returned from the above queries in github (I d
 this exercise and the queries within serves as a useful template to perform benchmark testing for SQL query optimization 
 between two different database servers. 
 
+Hopefully, this can also serve as a helpful template and resource for others performing SQL benchmark testing in the future.
+
 
 """
 
