@@ -6,7 +6,9 @@
 ## run through vs code, conda with jupyter notebook, API from databento or alpaca
 
 ## This approach is meant to emulate a swing trading strategy, mitigating risk and delivering outsized moves in a systematic, rule-driven manner
-
+## When the below mechanical trading approach is combined with high fidelity data pipeline, sentiment analysis model, and extreme backtests it may or may not prove 
+## as a resource to aid the development of above trading strategy
+## 
 
 ## data acquisition 
 
