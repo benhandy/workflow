@@ -1,7 +1,7 @@
-# simple mechanical trading experimentation 
+# automating an intratrading thesis 
 
 # Thesis: 
-# To automate trading of fundamentally viable, low-liquidity momentum stocks experiencing volatility dislocations
+# To automate trading of fundamentally viable momentum stocks experiencing volatility dislocations
 # entering only when trend, volume, and bounce signals align
 # while managing each position with ATR-based sizing and dynamic stops for short-term 
 # run through vs code, conda with jupyter notebook, API from databento or alpaca
