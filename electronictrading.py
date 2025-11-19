@@ -176,4 +176,4 @@ print(f"\nOPTIMIZED KEY METRIC: PRECISION for BUY (1): {final_precision:.4f}")
 ## This code only tests one screener (ie. ticker $QS) and cannot automate the Gross Profit Margin or Institutional Ownership filters using just yfinance
 ## Before automating, you need a separate script or tool to scan the entire market against your fundamental/liquidity rules and output the 5-10 tickers
 ## which then become the input for current model
-## Above code is a simple mechanical trading solution that paves the way for Backtesting phase to integrate risk management rules and verify validity of of above model
+## Above code is a simple mechanical trading solution that paves the way for Backtesting phase to integrate risk management rules and verify validity of above statistical model
