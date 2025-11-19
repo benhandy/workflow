@@ -147,16 +147,16 @@ y_train_final, y_test_final = y[:split], y[split:]
 # make predictions on test set 
 y_pred = best_model.predict(X_test_final)
 
-# --- Classification Report (Test Data) ---
+# classifications report of test data 
 print("--- Classification Report (Test Data) ---")
 print(classification_report(y_test_final, y_pred, zero_division=0)) # Use zero_division=0 for cleaner output
 
-# Get Feature Importance (Critical for understanding what the model prioritized)
+# get feature importance (critical for understanding what the model prioritized)
 importance = pd.Series(best_model.feature_importances_, index=features).sort_values(ascending=False)
 print("\n--- Feature Importance (from Best Model) ---")
 print(importance)
 
-# --- Key Metric Check ---
-# Output the optimized metric for the LLM to analyze
+# key metric check for analysis 
+
 final_precision = precision_score(y_test_final, y_pred, pos_label=1, zero_division=0)
 print(f"\nOPTIMIZED KEY METRIC: PRECISION for BUY (1): {final_precision:.4f}")
