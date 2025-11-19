@@ -10,7 +10,7 @@
 ## When the below mechanical trading approach is combined with a high-fidelity data pipeline, a sentiment analysis model, and extreme backtests (easier said than done)  it may or may not prove to have a positive expected value
 ## thus serving as a viable systematic trading signal
 ##As a resource to aid the development of the above trading strategy, I will continue to refine the model's predictive power,
-## validate the risk controls, and prepare architeture for deployment
+## validate the risk controls, and prepare architecture for deployment
 
 
 
