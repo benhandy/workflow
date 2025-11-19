@@ -155,7 +155,11 @@ importance = pd.Series(best_model.feature_importances_, index=features).sort_val
 print("\n--- Feature Importance (from Best Model) ---")
 print(importance)
 
+
 # key metric check for analysis 
 
 final_precision = precision_score(y_test_final, y_pred, pos_label=1, zero_division=0)
 print(f"\nOPTIMIZED KEY METRIC: PRECISION for BUY (1): {final_precision:.4f}")
+
+
+## All code above functions as a statistical report. It does not account for slippage, commissions, or outlined complex ATR-based risk management rules
