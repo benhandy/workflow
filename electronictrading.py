@@ -22,7 +22,7 @@ from sklearn.metrics import make_scorer, precision_score
 
 # enter stock ticker 
 ticker = 'QS' 
-# request 6 months of data at 1 hr interval and use different api (databento/alpaca)
+# request 6 months of data at 1 hr interval and use different data source than y finance
 data = yf.download(ticker, period='6mo', interval='1h') 
 
 if data.empty:
