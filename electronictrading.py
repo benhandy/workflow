@@ -1,9 +1,9 @@
 
-# Thesis
-# To automate trading of fundamentally viable momentum stocks experiencing volatility dislocations
-# entering only when trend, volume, and bounce signals align
-# while managing each position with ATR-based sizing and dynamic stops for short-term 
-# run through vs code, conda with jupyter notebook, API from databento or alpaca
+## Thesis
+## To automate trading of fundamentally viable momentum stocks experiencing volatility dislocations
+## entering only when trend, volume, and bounce signals align
+## while managing each position with ATR-based sizing and dynamic stops for short-term 
+## run through vs code, conda with jupyter notebook, API from databento or alpaca
 
 
 ## data acquisition 
@@ -163,3 +163,7 @@ print(f"\nOPTIMIZED KEY METRIC: PRECISION for BUY (1): {final_precision:.4f}")
 
 
 ## All code above functions as a statistical report. It does not account for slippage, commissions, or outlined complex ATR-based risk management rules
+## The ML model might have high precision, but if the signal fires when the stock is already extended (high volatility), stop loss might be immediately hit, causing a net loss
+## This calls for integration of the model into a robust backtesting framework (ie. backtesting.py or backtrader) where you can hard-code the risk management logic
+## This code only tests one screener (ie. ticker $QS) and cannot automate the Gross Profit Margin or Institutional Ownership filters using just yfinance
+##
