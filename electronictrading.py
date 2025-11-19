@@ -5,6 +5,8 @@
 ## while managing each position with ATR-based sizing and dynamic stops for short-term 
 ## run through vs code, conda with jupyter notebook, API from databento or alpaca
 
+## This approach is meant to emulate a swing trading strategy, mitigating risk and delivering outsized moves in a systematic, rule-driven manner
+
 
 ## data acquisition 
 
@@ -166,4 +168,6 @@ print(f"\nOPTIMIZED KEY METRIC: PRECISION for BUY (1): {final_precision:.4f}")
 ## The ML model might have high precision, but if the signal fires when the stock is already extended (high volatility), stop loss might be immediately hit, causing a net loss
 ## This calls for integration of the model into a robust backtesting framework (ie. backtesting.py or backtrader) where you can hard-code the risk management logic
 ## This code only tests one screener (ie. ticker $QS) and cannot automate the Gross Profit Margin or Institutional Ownership filters using just yfinance
-##
+## Before automating, you need a separate script or tool to scan the entire market against your fundamental/liquidity rules and output the 5-10 tickers
+## which then become the input for current model
+## Above code is a simple mechanical trading solution that paves the way for Backtesting phase to integrate risk management rules and verify validity of of above model
