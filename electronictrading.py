@@ -5,7 +5,7 @@
 ## while managing each position with ATR-based sizing and dynamic stops for short-term 
 ## run through vs code, conda with jupyter notebook, API from databento or alpaca
 
-## This approach is meant to emulate a single niche swing trading strategy for fundamentally viable small-cap and mid-cap stocks experiencing sudden, retail-driven liquidity shocks (volatility dislocations) 
+## This approach is meant to test and emulate a singular niche trading strategy for fundamentally viable small-cap and mid-cap stocks experiencing sudden, retail-driven liquidity shocks (volatility dislocations) 
 ## mitigating risk and delivering outsized moves in a systematic, rule-driven manner
 ## When the below mechanical trading approach is combined with a high-fidelity data pipeline, a sentiment analysis model, and extreme backtests (easier said than done)  it may or may not prove to have a positive expected value
 ## thus serving as a viable systematic trading signal
