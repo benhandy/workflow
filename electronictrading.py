@@ -1,6 +1,5 @@
-# automating an intratrading thesis 
 
-# Thesis: 
+# Thesis
 # To automate trading of fundamentally viable momentum stocks experiencing volatility dislocations
 # entering only when trend, volume, and bounce signals align
 # while managing each position with ATR-based sizing and dynamic stops for short-term 
