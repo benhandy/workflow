@@ -74,7 +74,7 @@ print(f"Data shape after optimized feature engineering: {data.shape}")
 
 ## optimmized target variable 
 
-N_BARS = 35        # look 35 1-Hour bars (approx. 5 trading days) into the future
+N_BARS = 35        # look 35 1-Hour bars (5 trading days) into the future
 THRESHOLD = 0.015  # target return of 1.5%
 
 data['Future_Return'] = data['Close'].pct_change(N_BARS).shift(-N_BARS)
@@ -83,11 +83,11 @@ data['Target'] = 0
 
 data.loc[data['Future_Return'] > THRESHOLD, 'Target'] = 1
 
-# exclude short-selling opportunities from the target variable to align with the strategy's long bias
+# exclude short-selling 
 data.loc[data['Future_Return'] < -THRESHOLD, 'Target'] = np.nan 
 
-data.dropna(subset=['Target'], inplace=True) # drop rows where we explicitly set the target to nan (sell signals)
-data.dropna(inplace=True) # final clean up after target shift
+data.dropna(subset=['Target'], inplace=True) 
+data.dropna(inplace=True) 
 
 print("Target variable distribution (Focus on Buy/Hold):")
 print(data['Target'].value_counts())
@@ -149,9 +149,9 @@ y_pred = best_model.predict(X_test_final)
 
 # classifications report of test data 
 print("--- Classification Report (Test Data) ---")
-print(classification_report(y_test_final, y_pred, zero_division=0)) # Use zero_division=0 for cleaner output
+print(classification_report(y_test_final, y_pred, zero_division=0))
 
-# get feature importance (critical for understanding what the model prioritized)
+# get feature importance 
 importance = pd.Series(best_model.feature_importances_, index=features).sort_values(ascending=False)
 print("\n--- Feature Importance (from Best Model) ---")
 print(importance)
