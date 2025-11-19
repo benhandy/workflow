@@ -1,8 +1,10 @@
-# developing momentum trading algorithms for testing
+# simple mechanical trading experimentation 
+
 # Thesis: 
 # target fundamentally viable, low-liquidity momentum stocks experiencing volatility dislocations
 # entering only when trend, volume, and bounce signals align
 # while managing each position with ATR-based sizing and dynamic stops for short-term 
+# run through vs code 
 
 
 ## data acquisition 
@@ -53,19 +55,20 @@ data['Vol_Ratio'] = data['Volume'] / data['Vol_Avg_20'] # Measures volume surge
 
 ## quantified features for bounce strategy 
 
-# 1. Deviance from Short-Term Trend (How stretched the price is)
+# 1. deviance from short-term trend 
 data['EMA_Dev'] = (data['Close'] - data['EMA_20']) / data['Close']
 
-# 2. Oversold Depth (Quantifies severity of the bounce potential)
-# Measures how far RSI is below 50, capped at 0 (only active when RSI < 50)
+# 2. oversold depth 
 data['RSI_Oversold_Depth'] = np.where(data['RSI_14'] < 50, 50 - data['RSI_14'], 0)
 
-# 3. Volatility Context (Normalizing ATR by Price)
+# 3. volatility context 
 data['ATR_Norm'] = data['ATR_14'] / data['Close']
 
-# 4. Mechanical Rules as Features
+# 4. mechanical rules as features 
 data['Trend_Reest'] = np.where(data['Close'] > data['EMA_20'], 1, 0)
 data['RSI_Curl'] = data['RSI_14'].diff()
 
 data.dropna(inplace=True)
 print(f"Data shape after optimized feature engineering: {data.shape}")
+
+
