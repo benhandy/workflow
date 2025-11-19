@@ -36,21 +36,21 @@ else:
 
 ## feature engineering for bounce and continuation
 
-# A. Volatility and Trend Indicators
+# A. volatility and trend indicators
 data['ATR_14'] = ta.volatility.AverageTrueRange(data['High'], data['Low'], data['Close'], window=14).average_true_range()
 data['EMA_20'] = ta.trend.ema_indicator(data['Close'], window=20)
 data['SMA_50'] = ta.trend.sma_indicator(data['Close'], window=50)
 
-# B. Momentum/Oversold Indicators
+# B. momentum/oversold indicators
 data['RSI_14'] = ta.momentum.RSIIndicator(data['Close'], window=14).rsi()
 stoch = ta.momentum.StochasticOscillator(data['High'], data['Low'], data['Close'], window=14, smooth_window=3)
 data['Stoch_K'] = stoch.stoch()
 data['Stoch_D'] = stoch.stoch_signal()
 
-# C. Volume/Flow Dislocation
+# C. volume/flow dislocation
 data['FI_2'] = ta.volume.ForceIndexIndicator(data['Close'], data['Volume'], window=2).force_index()
 data['Vol_Avg_20'] = data['Volume'].rolling(window=20).mean()
-data['Vol_Ratio'] = data['Volume'] / data['Vol_Avg_20'] # Measures volume surge
+data['Vol_Ratio'] = data['Volume'] / data['Vol_Avg_20'] # measures volume surge
 
 ## quantified features for bounce strategy 
 
