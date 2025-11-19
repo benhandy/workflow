@@ -1,10 +1,10 @@
 # simple mechanical trading experimentation 
 
 # Thesis: 
-# target fundamentally viable, low-liquidity momentum stocks experiencing volatility dislocations
+# To automate trading of fundamentally viable, low-liquidity momentum stocks experiencing volatility dislocations
 # entering only when trend, volume, and bounce signals align
 # while managing each position with ATR-based sizing and dynamic stops for short-term 
-# run through vs code 
+# run through vs code, conda with jupyter notebook, API from databento or alpaca
 
 
 ## data acquisition 
@@ -72,3 +72,91 @@ data.dropna(inplace=True)
 print(f"Data shape after optimized feature engineering: {data.shape}")
 
 
+## optimmized target variable 
+
+N_BARS = 35        # look 35 1-Hour bars (approx. 5 trading days) into the future
+THRESHOLD = 0.015  # target return of 1.5%
+
+data['Future_Return'] = data['Close'].pct_change(N_BARS).shift(-N_BARS)
+
+data['Target'] = 0
+
+data.loc[data['Future_Return'] > THRESHOLD, 'Target'] = 1
+
+# exclude short-selling opportunities from the target variable to align with the strategy's long bias
+data.loc[data['Future_Return'] < -THRESHOLD, 'Target'] = np.nan 
+
+data.dropna(subset=['Target'], inplace=True) # drop rows where we explicitly set the target to nan (sell signals)
+data.dropna(inplace=True) # final clean up after target shift
+
+print("Target variable distribution (Focus on Buy/Hold):")
+print(data['Target'].value_counts())
+
+
+## timeseriessplit + tuning
+
+# features and target
+features = [
+    'ATR_14', 'EMA_20', 'SMA_50', 'RSI_14', 'Stoch_K', 'Stoch_D', 
+    'FI_2', 'Vol_Ratio', 'Trend_Reest', 'RSI_Curl', 'Close', 'Volume',
+    'EMA_Dev', 'RSI_Oversold_Depth', 'ATR_Norm'
+]
+X = data[features]
+y = data['Target'].astype(int)
+
+# time-series CV
+tscv = TimeSeriesSplit(n_splits=5)
+
+# scaling (fit only on training folds inside GridSearch)
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# precision on positive class
+precision_scorer = make_scorer(precision_score, pos_label=1)
+
+# hyperparameter grid
+param_grid = {
+    'n_estimators': [150, 250],
+    'max_depth': [8, 12],
+    'min_samples_split': [5, 10],
+    'class_weight': ['balanced', 'balanced_subsample']
+}
+
+# grid search with time-series CV
+rf = RandomForestClassifier(random_state=42)
+grid_search = GridSearchCV(
+    estimator=rf,
+    param_grid=param_grid,
+    scoring=precision_scorer,
+    cv=tscv,
+    n_jobs=-1
+)
+grid_search.fit(X_scaled, y)
+best_model = grid_search.best_estimator_
+
+print("Best Model Parameters:", grid_search.best_params_)
+
+# final train/test split from last fold
+split = list(tscv.split(X_scaled))[-1][0].stop
+X_train_final, X_test_final = X_scaled[:split], X_scaled[split:]
+y_train_final, y_test_final = y[:split], y[split:]
+
+
+## optimized model evaluation 
+
+# make predictions on test set 
+y_pred = best_model.predict(X_test_final)
+
+# --- Classification Report (Test Data) ---
+print("--- Classification Report (Test Data) ---")
+print(classification_report(y_test_final, y_pred, zero_division=0)) # Use zero_division=0 for cleaner output
+
+# Get Feature Importance (Critical for understanding what the model prioritized)
+importance = pd.Series(best_model.feature_importances_, index=features).sort_values(ascending=False)
+print("\n--- Feature Importance (from Best Model) ---")
+print(importance)
+
+# --- Key Metric Check ---
+# Output the optimized metric for the LLM to analyze
+final_precision = precision_score(y_test_final, y_pred, pos_label=1, zero_division=0)
+print(f"\nOPTIMIZED KEY METRIC: PRECISION for BUY (1): {final_precision:.4f}")
