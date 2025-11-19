@@ -74,7 +74,7 @@ print(f"Data shape after optimized feature engineering: {data.shape}")
 ## optimmized target variable 
 
 N_BARS = 35        # look 35 1-Hour bars (5 trading days) into the future
-THRESHOLD = 0.015  # target return of 1.5%
+THRESHOLD = 0.10  # target return of 5-10%
 
 data['Future_Return'] = data['Close'].pct_change(N_BARS).shift(-N_BARS)
 
